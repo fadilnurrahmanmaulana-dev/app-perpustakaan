@@ -1,67 +1,60 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Buku</title>
-    <style>        body { font-family: sans-serif; margin: 40px; max-width: 500px; }        label { display: block; margin-top: 12px; font-weight: bold; }        input, select { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }        .error { color: #b91c1c; font-size: 14px; margin-top: 4px; }        .btn { margin-top: 20px; padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; }    </style>
-</head>
-<body>
+@extends('layouts.app')
+@section('title', 'Tambah Buku')
+@section('content')
     <h1>Tambah Buku</h1>
-    <p><a href="{{ route('books.index') }}">&larr; Kembali ke daftar buku</a></p>
+    <p><a href="{{ route('books.index') }}" class="btn">&larr; Kembali ke daftar buku</a></p>
 
     <form action="{{ route('books.store') }}" method="POST">
         @csrf
-
-        <label for="judul">Judul</label>
-        <input type="text" name="judul" id="judul" value="{{ old('judul') }}">
+        <label for="judul" style="display: block; margin-top: 12px; font-weight: bold;">Judul</label>
+        <input type="text" name="judul" id="judul" value="{{ old('judul') }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
         @error('judul')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <label for="penulis">Penulis</label>
-        <input type="text" name="penulis" id="penulis" value="{{ old('penulis') }}">
+        <label for="penulis" style="display: block; margin-top: 12px; font-weight: bold;">Penulis</label>
+        <input type="text" name="penulis" id="penulis" value="{{ old('penulis') }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
         @error('penulis')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <label for="penerbit">Penerbit</label>
-        <input type="text" name="penerbit" id="penerbit" value="{{ old('penerbit') }}">
+        <label for="penerbit" style="display: block; margin-top: 12px; font-weight: bold;">Penerbit</label>
+        <input type="text" name="penerbit" id="penerbit" value="{{ old('penerbit') }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
         @error('penerbit')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <label for="tahun_terbit">Tahun Terbit</label>
-        <input type="number" name="tahun_terbit" id="tahun_terbit" value="{{ old('tahun_terbit') }}">
+        <label for="tahun_terbit" style="display: block; margin-top: 12px; font-weight: bold;">Tahun Terbit</label>
+        <input type="number" name="tahun_terbit" id="tahun_terbit" value="{{ old('tahun_terbit') }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
         @error('tahun_terbit')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <label for="isbn">ISBN (opsional)</label>
-        <input type="text" name="isbn" id="isbn" value="{{ old('isbn') }}">
+        <label for="isbn" style="display: block; margin-top: 12px; font-weight: bold;">ISBN</label>
+        <input type="text" name="isbn" id="isbn" value="{{ old('isbn') }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
         @error('isbn')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <label for="stok">Stok</label>
-        <input type="number" name="stok" id="stok" value="{{ old('stok', 1) }}">
+        <label for="stok" style="display: block; margin-top: 12px; font-weight: bold;">Stok</label>
+        <input type="number" name="stok" id="stok" value="{{ old('stok', 1) }}" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
         @error('stok')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <label for="category_id">Kategori</label>
-        <select name="category_id" id="category_id">
+        <label for="category_id" style="display: block; margin-top: 12px; font-weight: bold;">Kategori</label>
+        <select name="category_id" id="category_id" style="width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;">
             <option value="">-- Pilih Kategori --</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category['id'] }}" @selected(old('category_id') == $category['id'])>
-                    {{ $category['nama_kategori'] }}
+            @foreach (App\Models\Category::all() as $cat)
+                <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>
+                    {{ $cat->nama_kategori }}
                 </option>
             @endforeach
         </select>
         @error('category_id')
-            <div class="error">{{ $message }}</div>
+            <div style="color: #b91c1c; font-size: 14px; margin-top: 4px;">{{ $message }}</div>
         @enderror
 
-        <button type="submit" class="btn">Simpan</button>
+        <button type="submit" class="btn" style="margin-top: 20px;">Simpan</button>
     </form>
-</body>
-</html>
+@endsection

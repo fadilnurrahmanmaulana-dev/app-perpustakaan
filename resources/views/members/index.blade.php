@@ -50,5 +50,6 @@
         </tbody>
     </table>
 
+    <!-- Pertahankan parameter search saat pindah halaman -->
     {{ $members->appends(request()->query())->links() }}
 @endsection

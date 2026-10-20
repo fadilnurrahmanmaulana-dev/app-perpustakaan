@@ -20,6 +20,7 @@
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Email</th>
+                <th>Telepon</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -31,6 +32,7 @@
                     <td>{{ $member->nim }}</td>
                     <td>{{ $member->nama }}</td>
                     <td>{{ $member->email }}</td>
+                    <td>{{ $member->telpon ?? '-' }}</td>
                     <td>{{ ucfirst($member->status) }}</td>
                     <td>
                         <a href="{{ route('members.show', $member->id) }}">Detail</a> |
@@ -44,7 +46,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">Belum ada data anggota / tidak ditemukan.</td>
+                    <td colspan="7">Belum ada data anggota / tidak ditemukan.</td>
                 </tr>
             @endforelse
         </tbody>

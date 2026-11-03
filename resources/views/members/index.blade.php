@@ -32,7 +32,7 @@
                     <td>{{ $member->nim }}</td>
                     <td>{{ $member->nama }}</td>
                     <td>{{ $member->email }}</td>
-                    <td>{{ $member->telpon ?? '-' }}</td>
+                    <td>{{ $member->nomor_telepon ?? '-' }}</td>
                     <td>{{ ucfirst($member->status) }}</td>
                     <td>
                         <a href="{{ route('members.show', $member->id) }}">Detail</a> |
